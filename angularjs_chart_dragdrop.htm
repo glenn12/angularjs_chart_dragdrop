@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>AngularJS Chart Drag & Drop</title>
+    <link rel='stylesheet' href='jqwidgets/styles/jqx.base.css' type='text/css' />
+    <script type='text/javascript' src='scripts/jquery-1.11.1.min.js'></script>
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type='text/javascript' src='jqwidgets/jqxcore.js'></script>
+    <script type="text/javascript" src="jqwidgets/jqxangular.js"></script>
+    <script type='text/javascript' src='jqwidgets/jqxdraw.js'></script>
+    <script type='text/javascript' src='jqwidgets/jqxdata.js'></script>
+    <script type='text/javascript' src='jqwidgets/jqxchart.core.js'></script>
+    <script type='text/javascript' src='jqwidgets/jqxdragdrop.js'></script>
+
+    <script type='text/javascript'>
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {        
+            // prepare chart data as an array
+            var sampleData = [
+                { Index: '1', SerieA: -30, SerieB: -10, SerieC: -25 },
+                { Index: '2', SerieA: -22, SerieB: -25, SerieC: 10 },
+                { Index: '3', SerieA: 30, SerieB: 0, SerieC: 25 },
+                { Index: '4', SerieA: 35, SerieB: 25, SerieC: 45 },
+                { Index: '5', SerieA: 0, SerieB: 20, SerieC: 25 }
+            ];
+
+            // prepare jqxChart settings
+            $scope.chartSettings = {
+                title: "Pyramid chart",
+                description: "drag and drop prototype",
+                enableAnimations: false,
+                showLegend: true,
+                padding: { left: 15, top: 15, right: 15, bottom: 15 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                {
+                    dataField: 'Index',
+                    tickMarks: {
+                        visible: true,
+                        interval: 1
+                    },
+                    gridLines: {
+                        visible: true,
+                        interval: 1
+                    }
+                },
+                valueAxis:
+                {
+                    labels: { horizontalAlignment: 'right' }
+                },
+                colorScheme: 'scheme02',
+                seriesGroups:
+                [
+                    {
+                        type: 'column',
+                        columnsGapPercent: 20,
+                        seriesGapPercent: 20,
+                        columnsTopWidthPercent: 0,
+                        columnsBottomWidthPercent: 100,
+                        series: [
+                                { dataField: 'SerieA', displayText: 'Serie A' },
+                                { dataField: 'SerieB', displayText: 'Serie B' },
+                                { dataField: 'SerieC', displayText: 'Serie C' }
+                            ]
+                    }
+                ]
+            };
+
+            $('#outer').jqxDragDrop();
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <p>
+            AngularJS Chart Drag and Drop prototype using jQWidgets <a href="http://www.jqwidgets.com/angularjs-ui-widgets/">AngularJS Directives</a>            
+        </p>
+        <div id='outer'>
+            <jqx-chart jqx-settings="chartSettings" jqx-watch="chartSettings.seriesGroups" style="width: 550px; height: 300px;"></jqx-chart>
+        </div>
+     </div>
+</body>
+</html>
