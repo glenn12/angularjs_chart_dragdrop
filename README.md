@@ -4,4 +4,4 @@ AngularJS Chart Drag and Drop prototype using jQWidgets <a href="http://www.jqwi
 
 Live demo:
 
-https://jsfiddle.net/7poy0pjq/
+https://jsfiddle.net/mpbjxvn8/
